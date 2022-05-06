@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Table(name = "todolist")
-public class TodoList {
+public class TaskModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +25,7 @@ public class TodoList {
     private String description;
 
     @Column(name = "is_check")
-    private boolean isCheck;
+    private boolean check;
 
     @Column(name = "created_timestamp")
     private ZonedDateTime createTimestamp;
