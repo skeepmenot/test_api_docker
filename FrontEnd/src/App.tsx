@@ -4,7 +4,7 @@ import logo from "./logo.svg"
 
 function App() {
   return (
-    <div className="App">
+    <div className="App  w-full min-h-screen bg-neutral-100">
       <Container>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure optio
         eligendi consequatur?
