@@ -27,8 +27,15 @@ function App() {
         </p>
         <div>
           <form>
-            <label htmlFor="">
-              <input type="text" placeholder="Please input text hear." />
+            <label htmlFor="todo-title">
+              <input
+                id="todo-title"
+                type="text"
+                spellCheck
+                required
+                placeholder="Please type title todo hear."
+                className={`px-2 py-3 focus:outline-light---primary-hover-color`}
+              />
             </label>
           </form>
         </div>
