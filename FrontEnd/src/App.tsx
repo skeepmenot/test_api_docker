@@ -40,18 +40,15 @@ function App() {
                 "rounded-md",
                 "border",
                 "border-light---negative-color",
-                "hover:border-light---negative-color-hover",
                 "bg-white",
+                "text-light---negative-color",
                 "px-4",
                 "py-2",
-                "text-light---negative-color",
-                "hover:text-light---negative-color-hover",
+                "hover:bg-light---negative-color/20",
                 "disabled:text-light---disabled-text-color",
                 "disabled:bg-light---disabled-background-color",
                 "disabled:border-neutral-200",
-                "disabled:cursor-not-allowed",
-                "hover:shadow-md",
-                "hover:shadow-light---negative-color/30"
+                "disabled:cursor-not-allowed"
               )}>
               Cancle
             </button>
