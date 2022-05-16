@@ -10,10 +10,15 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: ${PSQL_DDL}
+      ddl-auto: update
   sql:
     init:
-      mode: ${PSQL_MODE}
+      mode: always
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger
 
 auth:
   http:
