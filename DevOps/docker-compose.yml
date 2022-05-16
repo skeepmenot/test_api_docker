@@ -1,14 +1,57 @@
 version: '3.8'
 
-
 services:
-  db_postgres:
+  postgres:
     image: postgres:14-alpine
+    container_name: ${PSQL_HOST:-postgres}
+    volumes:
+      - postgres:/var/lib/postgresql
+      - data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - "${PSQL_PORT:-5432}:5432"
+    networks:
+      - network
     environment:
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=admin
+      - POSTGRES_USER=${PSQL_USERNAME:-admin}
+      - POSTGRES_PASSWORD=${PSQL_PASSWORD:-password}
+      - TZ=${TIMEZONE:-"UTC"}
+    restart: always
+  backend:
+    depends_on:
+      - postgres
+    build:
+      context: ./../BackEnd/
+      dockerfile: Dockerfile
+      args:
+        - PSQL_HOST=${PSQL_HOST:-postgres}
+        - PSQL_PORT=${PSQL_PORT:-5432}
+        - PSQL_USERNAME=${PSQL_USERNAME:-admin}
+        - PSQL_PASSWORD=${PSQL_PASSWORD:-password}
+        - AUTH_HEADER=${AUTH_HEADER:-APIKEY}
+        - AUTH_TOKEN=${AUTH_TOKEN:-123456}
+    image: ${BACKEND_NAME:-backend}:${BACKEND_VERSION:-latest}
+    container_name: ${BACKEND_NAME:-backend}
+    volumes:
+      - service:/tmp
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    networks:
+      - network
+    environment:
+      - PSQL_HOST=${PSQL_HOST:-postgres}
+      - PSQL_PORT=${PSQL_PORT:-5432}
+      - PSQL_USERNAME=${PSQL_USERNAME:-admin}
+      - PSQL_PASSWORD=${PSQL_PASSWORD:-password}
+      - AUTH_HEADER=${AUTH_HEADER:-APIKEY}
+      - AUTH_TOKEN=${AUTH_TOKEN:-123456}
+      - TZ=${TIMEZONE:-"UTC"}
     restart: always
 
+volumes:
+  postgres: {}
+  data: {}
+  service: {}
 
+networks:
+  network:
+    driver: bridge
