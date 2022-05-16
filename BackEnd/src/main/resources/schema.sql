@@ -8,6 +8,4 @@ CREATE TABLE IF NOT EXISTS public.todolist
     modified_timestamp timestamptz  DEFAULT now() NOT NULL
     );
 
-CREATE UNIQUE INDEX todolist_id_uindex ON public.todolist (id);
-
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin;
+CREATE UNIQUE INDEX IF NOT EXISTS todolist_id_uindex ON public.todolist (id);
