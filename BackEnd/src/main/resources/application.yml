@@ -4,16 +4,21 @@ server:
     context-path: /todo
 spring:
   datasource:
-    url: ${PSQL_HOST}
+    url: jdbc:postgresql://${PSQL_HOST}:${PSQL_PORT}/postgres
     username: ${PSQL_USERNAME}
     password: ${PSQL_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: ${PSQL_DDL}
+      ddl-auto: update
   sql:
     init:
-      mode: ${PSQL_MODE}
+      mode: always
+
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger
 
 auth:
   http:
