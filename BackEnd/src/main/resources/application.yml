@@ -4,7 +4,7 @@ server:
     context-path: /todo
 spring:
   datasource:
-    url: ${PSQL_HOST}
+    url: jdbc:postgresql://${PSQL_HOST}:${PSQL_PORT}/postgres
     username: ${PSQL_USERNAME}
     password: ${PSQL_PASSWORD}
     driver-class-name: org.postgresql.Driver
